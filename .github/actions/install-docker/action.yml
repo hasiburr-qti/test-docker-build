@@ -13,7 +13,7 @@ runs:
         apt-transport-https \
         ca-certificates \
         curl \
-         gnupg \
+        gnupg \
         lsb-release
 
     - name: Add Docker signed gpg key
