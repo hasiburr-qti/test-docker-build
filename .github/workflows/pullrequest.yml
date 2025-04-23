@@ -18,13 +18,13 @@ jobs:
     outputs:
       build_image: ${{ steps.build.outputs.build_image }}
     steps:
-      - name: Install Docker system in the runner
-        uses: ./.github/actions/install-docker
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
+
+      - name: Install Docker system in the runner
+        uses: ./.github/actions/install-docker
 
       - name: Build the Docker image
         id: build
