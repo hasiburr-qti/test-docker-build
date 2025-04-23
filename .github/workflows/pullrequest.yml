@@ -23,8 +23,11 @@ jobs:
         id: clone
         run: |
           pwd
+          cd ..
+          pwd
           git clone https://github.com/hasiburr-qti/test-docker-build-2.git
           ls
+          ls test-docker-build-2
         env:
           GITHUB_TOKEN: ${{ secrets.HASIB_TOKEN }}
 
@@ -43,7 +46,8 @@ jobs:
           set -eux
           pwd
           ls
-          docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} test-docker-build-2/${{ env.DOCKER_FILE_PATH }}
+          ls ..
+          docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ../test-docker-build-2/${{ env.DOCKER_FILE_PATH }}
 
           echo "Build successful for image ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
           echo "build_image=${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}" >> "$GITHUB_OUTPUT"
