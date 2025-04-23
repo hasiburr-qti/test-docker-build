@@ -18,6 +18,16 @@ jobs:
     outputs:
       build_image: ${{ steps.build.outputs.build_image }}
     steps:
+
+      - name: Clone test-docker-build-2 repository
+        id: clone
+        run: |
+          pwd
+          git clone https://github.com/hasiburr-qti/test-docker-build-2.git
+          ls
+        env:
+          GITHUB_TOKEN: ${{ secrets.HASIB_TOKEN }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -31,7 +41,9 @@ jobs:
         run: |
           # Build the docker image
           set -eux
-          docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.DOCKER_FILE_PATH }}
+          pwd
+          ls
+          docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} test-docker-build-2/${{ env.DOCKER_FILE_PATH }}
 
           echo "Build successful for image ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
           echo "build_image=${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}" >> "$GITHUB_OUTPUT"
