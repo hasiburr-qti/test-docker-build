@@ -1,5 +1,6 @@
 ---
-name: Pullrequest
+name: docker_build_test
+run-name: docker_build
 
 on:
   workflow_dispatch:
@@ -18,7 +19,7 @@ jobs:
       build_image: ${{ steps.build.outputs.build_image }}
     steps:
       - name: Install Docker system in the runner
-        uses: .github/actions/install-docker
+        uses: ./.github/actions/install-docker
 
       - name: Checkout repository
         uses: actions/checkout@v4
